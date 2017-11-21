@@ -13,6 +13,7 @@ Map::Map(const std::string &fileName) {
     m_entities = new Entity[m_height * m_width];
     m_floor = new Entity[m_height * m_width];
 
+    // parse maze map file
     for (int i = 0; i < m_height; i++) {
         for (int j = 0; j < m_width; j++) {
             int index = i * m_width + j;
@@ -59,10 +60,12 @@ void Map::Draw(Shader &shader, Camera &camera, float counter) {
                     m_entities[index].GetTransform().GetAngle() = counter * 3.14f / 2;
                 else if (type == TYPE_GOAL)
                     m_entities[index].GetTransform().GetAngle() = -counter * 3.14f;
-                else if (type == TYPE_DOOR && ((index-m_width>=0 && m_entities[index-m_width].GetType()==TYPE_WALL)
-                                               || (index+m_width<m_height*m_width && m_entities[index+m_width].GetType()==TYPE_WALL))) {
+                else if (type == TYPE_DOOR &&
+                         ((index - m_width >= 0 && m_entities[index - m_width].GetType() == TYPE_WALL)
+                          || (index + m_width < m_height * m_width &&
+                              m_entities[index + m_width].GetType() == TYPE_WALL))) {
                     // if needed, flip a door by 90 degrees based on the walls around it.
-                    m_entities[index].GetTransform().GetAngle() = (float)M_PI/2.f;
+                    m_entities[index].GetTransform().GetAngle() = (float) M_PI / 2.f;
                     m_entities[index].GetTransform().GetRot() = glm::vec3(0, 1, 0);
                 }
                 m_entities[index].Draw(shader, camera);

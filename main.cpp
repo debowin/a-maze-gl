@@ -12,7 +12,7 @@ int main() {
     SDL_Init(SDL_INIT_EVERYTHING);
     Display display(1920, 1080, "aMazeGL by DC");
     Shader shader("../res/basicShader");
-    Map gameMap("../res/example2.map");
+    Map gameMap("../res/example3.map");
 
     glm::vec3 startPos = gameMap.GetStartPos();
 
@@ -35,7 +35,12 @@ int main() {
     );
     // directional light from the upper right.
     DirectionalLight directionalLight(
-            glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(-1, -1, -1)
+            glm::vec3(0.4f, 0.4f, 0.4f), glm::vec3(0, -1, 0)
+    );
+    // spot light from user's perspective - flashLight
+    SpotLight flashLight(
+            glm::vec3(.4f, .4f, .3f), startPos, camera.GetForward(),
+            glm::cos(glm::radians(12.5f)), glm::cos(glm::radians(17.5f))
     );
     glm::vec3 ambientLight = glm::vec3(0.2f, 0.2f, 0.2f);
 
@@ -103,6 +108,9 @@ int main() {
         for (PointLight pointLight: pointLights)
             pointLight.SetShaderUniform(shader, camera);
         directionalLight.SetShaderUniform(shader, camera);
+        flashLight.GetPosition() = camera.GetPos();
+        flashLight.GetDirection() = camera.GetForward();
+        flashLight.SetShaderUniform(shader, camera);
         shader.setVec3("ambientLight", ambientLight);
 
         gameMap.Draw(shader, camera, counter);

@@ -35,6 +35,7 @@ public:
     GLuint CreateShader(std::string text, GLenum shaderType);
     void UpdateUniforms(const Transform& transform, Camera& camera, const Material& material);
     void setVec3(const std::string &key, glm::vec3 value);
+    void setFloat(const std::string &key, float value);
 };
 
 

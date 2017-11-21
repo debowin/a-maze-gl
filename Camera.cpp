@@ -2,6 +2,7 @@
 // Created by debowin on 11/13/17.
 //
 #define GLM_SWIZZLE
+
 #include <glm/gtx/transform.hpp>
 #include "Camera.h"
 
@@ -42,7 +43,7 @@ glm::vec3 &Camera::GetForward() {
 }
 
 void Camera::turn(float angle) {
-    GetForward() = (glm::rotate(angle, glm::vec3(0, 1, 0)) * glm::vec4(GetForward(), 0.f)).xyz();
+    m_forward = (glm::rotate(angle, glm::vec3(0, 1, 0)) * glm::vec4(GetForward(), 0.f)).xyz();
 }
 
 glm::vec3 Camera::getMove(float distance) {

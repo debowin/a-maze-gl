@@ -2,6 +2,13 @@
 Computer Graphics Project #4 Realtime OpenGL Maze Game
 
 A simple yet pretty-looking interactive 3D first-person Maze Game built using OpenGL.
+>It's **a maze** game made with Open**GL**. Geddit? ( ͡° ͜ʖ ͡°)
+
+## GAMEPLAY SNAPSHOT
+![Game Snapshot](res/game.png)
+
+## GAMEPLAY VIDEO
+[![Gameplay Video](https://imgur.com/fDrZ3SX)](https://www.youtube.com/watch?v=xQQIzod7fCU)
 
 ## MAP FORMAT
 The map stores the world as a `rectilinear` map. The first row is `width` and
@@ -28,15 +35,11 @@ doors.
 * `Lighting`: Ambient and diffuse lighting.
 
 ## ADVANCED FEATURES - EXTRA CREDIT
-* Multiple point lights and directional light.
+* Multiple point lights on the maze corners and an overhead directional light.
+* Soft-edged Flashlight that moves with the player.
 * Textured walls, floor, door, keys and goal.
-* Used self composed models to represent keys, doors, walls, floor with [Wings3D](http://www.wings3d.com).
-* Model loading in the [OBJ 3D models format](http://enwp.org/Wavefront_.obj_file). Supports v, vt, vn, f tags.
-* Enter key can be used to pick up a key or switch the key held by you.
+* Original models to represent keys, doors, walls, floor made with [Wings3D](http://www.wings3d.com).
+* Models can be loaded in the [OBJ 3D models format](http://enwp.org/Wavefront_.obj_file). Supports v, vt, vn, f tags.
+* ENTER can be used to pick up a key or switch the key held by you.
 * The held key is always rendered pointing away from the user for a true first-person experience.
-* Holding Shift key while moving or turning, does it faster.
-
-## GAMEPLAY SNAPSHOT
-![Game Snapshot](res/game.png)
-
-## GAMEPLAY VIDEO
+* Holding SHIFT while moving or turning, does it faster.

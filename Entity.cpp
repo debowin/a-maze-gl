@@ -4,7 +4,7 @@
 
 #include "Entity.h"
 
-void Entity::InitWall(const Transform &transform){
+void Entity::InitWall(const Transform &transform) {
     m_mesh.InitMesh("../res/wall.obj");
     m_texture.InitTexture("../res/bricks.bmp");
     m_transform = transform;
