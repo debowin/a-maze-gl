@@ -8,7 +8,7 @@ A simple yet pretty-looking interactive 3D first-person Maze Game built using Op
 ![Game Snapshot](res/game.png)
 
 ## GAMEPLAY VIDEO
-[![Gameplay Video](https://imgur.com/fDrZ3SX)](https://www.youtube.com/watch?v=xQQIzod7fCU)
+[![Gameplay Video](https://imgur.com/fDrZ3SX.png)](https://www.youtube.com/watch?v=xQQIzod7fCU)
 
 ## MAP FORMAT
 The map stores the world as a `rectilinear` map. The first row is `width` and
