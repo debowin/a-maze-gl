@@ -45,6 +45,7 @@ vec3 applyDirectionalLighting(vec3 color, DirectionalLight light, vec3 normal, v
 
 vec3 applySpotLighting(vec3 color, SpotLight light, vec3 normal, vec3 pos, vec3 viewDir){
     float fallOff = 1.0/length(light.position - pos);
+    if(fallOff < 0.0001f) return vec3(0, 0, 0);
     vec3 lightDir = normalize(light.position - pos);
     float theta = dot(normalize(-light.direction), lightDir);
     float epsilon = light.cutOffTheta - light.cutOffGamma;
@@ -58,6 +59,7 @@ vec3 applySpotLighting(vec3 color, SpotLight light, vec3 normal, vec3 pos, vec3 
 
 vec3 applyPointLighting(vec3 color, PointLight light, vec3 normal, vec3 pos, vec3 viewDir){
     float fallOff = 1.0/length(light.position - pos);
+    if(fallOff < 0.0001f) return vec3(0, 0, 0);
     vec3 lightDir = normalize(light.position - pos);
     vec3 diffuseColor = max(0.0, dot(normal, lightDir)) * color * light.color;
     vec3 halfDir = normalize(lightDir + viewDir);

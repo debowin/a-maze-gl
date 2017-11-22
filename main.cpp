@@ -50,6 +50,13 @@ int main() {
     SDL_Event event{};
     float turnAngle, movement, step = 0.03f;
     bool pickUp;
+
+    // global lighting
+    for (PointLight pointLight: pointLights)
+        pointLight.SetShaderUniform(shader, camera);
+    directionalLight.SetShaderUniform(shader, camera);
+    shader.setVec3("ambientLight", ambientLight);
+
     while (true) {
         turnAngle = 0.f;
         movement = 0.f;
@@ -105,13 +112,11 @@ int main() {
 
         counter = SDL_GetTicks() / 1000.f;
         display.Clear(0.0784f, 0.290f, 0.368f, 1.f);
-        for (PointLight pointLight: pointLights)
-            pointLight.SetShaderUniform(shader, camera);
-        directionalLight.SetShaderUniform(shader, camera);
+
+        // dynamic lighting
         flashLight.GetPosition() = camera.GetPos();
         flashLight.GetDirection() = camera.GetForward();
         flashLight.SetShaderUniform(shader, camera);
-        shader.setVec3("ambientLight", ambientLight);
 
         gameMap.Draw(shader, camera, counter);
 
