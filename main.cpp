@@ -52,9 +52,6 @@ int main() {
     bool pickUp;
 
     // global lighting
-    for (PointLight pointLight: pointLights)
-        pointLight.SetShaderUniform(shader, camera);
-    directionalLight.SetShaderUniform(shader, camera);
     shader.setVec3("ambientLight", ambientLight);
 
     while (true) {
@@ -109,6 +106,11 @@ int main() {
         if (pickUp) {
             gameMap.PickUpKey(camera.GetPos());
         }
+
+        for (PointLight pointLight: pointLights)
+            pointLight.SetShaderUniform(shader, camera);
+        directionalLight.SetShaderUniform(shader, camera);
+
 
         counter = SDL_GetTicks() / 1000.f;
         display.Clear(0.0784f, 0.290f, 0.368f, 1.f);
