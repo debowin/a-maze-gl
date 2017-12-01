@@ -43,3 +43,26 @@ doors.
 * ENTER can be used to pick up a key or switch the key held by you.
 * The held key is always rendered pointing away from the user for a true first-person experience.
 * Holding SHIFT while moving or turning, does it faster.
+
+## CHALLENGES
+* `Modelling and Texturing` - Learning to model and texture my own 3D objects was a challenge but Prof. Guy's quick intro to
+Wings3D encouraged me to try it out.
+* `Reading OBJ Files` - I used the OBJ loader created by [bennybox](https://github.com/BennyQBD) and augmented it to be able to read in OBJs
+with all or any of normal, texture and vertex data.
+* `Reading MTL Files` - I also added code to read in Material properties from MTL files which can be attached to any Entity.
+* `Normalizing OBJ Files` - I had to normalize the OBJ 3D models in Wings3D by using a unit bounding box
+so that all objects had a comparable size.
+* `Collision Detection` - I went with the easy way of doing this by using a grid to denote my map and marking cells with walls, doors and
+empty space as invalid areas where a player cannot step. I also added a slight offset while checking if my position is invalid, which helped
+me avoid seeing inside of walls.
+* `Animation` - I figured it would be better to have some of the interactive items move around a bit so that it
+looks attractive and catches the player's attention.
+* `Lighting` - I drew from the LearnOpenGL tutorial and used 3 kinds of lights in my game with the Phong Lighting Model - point, directional and spot lights.
+To have soft edges on the spotlight, I had to define two angles for falloff calculation.
+* `Updating Uniforms` - I realized the light positions/directions had to be updated according to the View and preferred to update it in CPU code once
+and update it as a uniform instead of doing it in the shaders. Also, using structs and functions in the shader helped me make the code more readable and modular.
+* `Moving the Key with User` - While moving the key was easy, rotating it was challenging as the dot product doesn't preserve the sign
+of the angle. So if we turn a 360, the object turns the other way around when we hit 180. To solve this problem, I used the cross product
+of view direction and key direction and checked to see if it was in the direction of the up vector.
+* `Key Switch`: In order to enable more complex mazes in which a key and door pair are not both accessible initially, I let the user
+switch his held key with another lying around.
