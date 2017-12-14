@@ -1,4 +1,4 @@
-#version 330 core
+#version 400 core
 #define NUM_POINT_LIGHTS 4
 
 in vec2 texCoordV;
@@ -45,7 +45,7 @@ vec3 applyDirectionalLighting(vec3 color, DirectionalLight light, vec3 normal, v
 
 vec3 applySpotLighting(vec3 color, SpotLight light, vec3 normal, vec3 pos, vec3 viewDir){
     float fallOff = 1.0/length(light.position - pos);
-    if(fallOff < 0.0001f) return vec3(0, 0, 0);
+//    if(fallOff < 0.0001f) return vec3(0, 0, 0);
     vec3 lightDir = normalize(light.position - pos);
     float theta = dot(normalize(-light.direction), lightDir);
     float epsilon = light.cutOffTheta - light.cutOffGamma;
@@ -59,7 +59,7 @@ vec3 applySpotLighting(vec3 color, SpotLight light, vec3 normal, vec3 pos, vec3 
 
 vec3 applyPointLighting(vec3 color, PointLight light, vec3 normal, vec3 pos, vec3 viewDir){
     float fallOff = 1.0/length(light.position - pos);
-    if(fallOff < 0.0001f) return vec3(0, 0, 0);
+//    if(fallOff < 0.0001f) return vec3(0, 0, 0);
     vec3 lightDir = normalize(light.position - pos);
     vec3 diffuseColor = max(0.0, dot(normal, lightDir)) * color * light.color;
     vec3 halfDir = normalize(lightDir + viewDir);
@@ -70,11 +70,11 @@ vec3 applyPointLighting(vec3 color, PointLight light, vec3 normal, vec3 pos, vec
 
 void main(){
     vec3 color = texture(tex, texCoordV).rgb;
-    vec3 result = color * ambientLight;
+    vec3 result = vec3(0);
     vec3 viewDir = normalize(-posV);
     result += applyDirectionalLighting(color, directionalLight, normalV, viewDir);
     result += applySpotLighting(color, spotLight, normalV, posV, viewDir);
     for(int i=0; i<NUM_POINT_LIGHTS; i++)
         result += applyPointLighting(color, pointLights[i], normalV, posV, viewDir);
-    gl_FragColor = vec4(result, 1);
+    gl_FragColor = vec4(max(result, color*ambientLight), 1);
 }

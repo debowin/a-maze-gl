@@ -11,16 +11,17 @@ Map::Map(const std::string &fileName) {
     char element;
     in >> m_width >> m_height;
     m_entities = new Entity[m_height * m_width];
-    m_floor = new Entity[m_height * m_width];
+    m_floor = Entity();
 
     // parse maze map file
+    Transform floorTransform;
+    floorTransform.GetTrans() = glm::vec3(0, -0.5f, -m_height/2.f);
+    floorTransform.GetScale() = glm::vec3(m_width, 1, m_height);
+    m_floor.InitFloor(floorTransform);
     for (int i = 0; i < m_height; i++) {
         for (int j = 0; j < m_width; j++) {
             int index = i * m_width + j;
             in >> element;
-            Transform floorTransform;
-            floorTransform.GetTrans() = glm::vec3(j - m_width / 2.0f + 0.5f, -0.5f, i + 0.5f - m_height);
-            m_floor[index].InitFloor(floorTransform);
             if (element == 'W') {
                 // wall
                 Transform wallTransform;
@@ -51,6 +52,7 @@ Map::Map(const std::string &fileName) {
 
 void Map::Draw(Shader &shader, Camera &camera, float counter) {
     // render all game entities
+    m_floor.Draw(shader, camera);
     for (int i = 0; i < m_height; i++) {
         for (int j = 0; j < m_width; j++) {
             int index = i * m_width + j;
@@ -70,7 +72,6 @@ void Map::Draw(Shader &shader, Camera &camera, float counter) {
                 }
                 m_entities[index].Draw(shader, camera);
             }
-            m_floor[index].Draw(shader, camera);
         }
     }
     if (m_heldKey.GetType() == TYPE_KEY) {

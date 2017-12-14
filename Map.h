@@ -19,7 +19,7 @@ enum{
 
 class Map {
     Entity* m_entities{};
-    Entity* m_floor{};
+    Entity m_floor{};
     int m_width{}, m_height{};
     glm::vec3 m_startPos{};
     Entity m_heldKey{};

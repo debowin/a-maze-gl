@@ -22,20 +22,20 @@ int main() {
     std::vector<PointLight> pointLights;
     // point lights atop the corners of the map.
     pointLights.emplace_back(
-            glm::vec3(1.f, 1.f, 1.f), glm::vec3(-gameMap.GetWidth() / 2.f, 2.f, 0.f), 0
+            glm::vec3(2.f, 2.f, 2.f), glm::vec3(-gameMap.GetWidth() / 2.f, 2.f, 0.f), 0
     );
     pointLights.emplace_back(
-            glm::vec3(1.f, 1.f, 1.f), glm::vec3(gameMap.GetWidth() / 2.f, 2.f, 0.f), 1
+            glm::vec3(2.f, 2.f, 2.f), glm::vec3(gameMap.GetWidth() / 2.f, 2.f, 0.f), 1
     );
     pointLights.emplace_back(
-            glm::vec3(1.f, 1.f, 1.f), glm::vec3(-gameMap.GetWidth() / 2.f, 2.f, -gameMap.GetHeight()), 2
+            glm::vec3(2.f, 2.f, 2.f), glm::vec3(-gameMap.GetWidth() / 2.f, 2.f, -gameMap.GetHeight()), 2
     );
     pointLights.emplace_back(
-            glm::vec3(1.f, 1.f, 1.f), glm::vec3(gameMap.GetWidth() / 2.f, 2.f, -gameMap.GetHeight()), 3
+            glm::vec3(2.f, 2.f, 2.f), glm::vec3(gameMap.GetWidth() / 2.f, 2.f, -gameMap.GetHeight()), 3
     );
     // directional light from the upper right.
     DirectionalLight directionalLight(
-            glm::vec3(0.4f, 0.4f, 0.4f), glm::vec3(0, -1, 0)
+            glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(0, -1, 0)
     );
     // spot light from user's perspective - flashLight
     SpotLight flashLight(
